@@ -1,0 +1,34 @@
+<mat-card
+  class="w-[300px] h-[150px] mx-auto"
+  appHoverEffect
+  [hoverColor]="hoverColor"
+>
+  <div class="flex justify-between items-start">
+    <mat-card-header class="font-bold text-base">
+      {{ task?.title }}
+    </mat-card-header>
+
+    <div class="flex space-x-2">
+      <mat-card-actions>
+        <button mat-icon-button (click)="onEdit()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-card-actions>
+      <mat-card-actions>
+        <button mat-icon-button (click)="deleteTask(task?.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </div>
+  </div>
+
+  <mat-card-content
+    class="text-sm mt-1"
+    [ngClass]="{
+      'text-green-600': task?.done == true,
+      'text-red-500': task.done == false
+    }"
+  >
+    {{ task?.done | taskStatus }}
+  </mat-card-content>
+</mat-card>

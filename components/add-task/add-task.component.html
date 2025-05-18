@@ -1,0 +1,42 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="relative w-[90%] max-w-md mx-auto p-6 bg-white rounded-xl shadow-md flex flex-col gap-4"
+>
+  <mat-card-header>
+    <strong>{{ isEditMode ? "Edit Task" : "Add New Task" }}</strong>
+  </mat-card-header>
+  <mat-icon
+    class="absolute top-2 right-2 cursor-pointer text-gray-600 hover:text-red-500"
+    (click)="onClose()"
+    role="button"
+    aria-label="Close dialog"
+    tabindex="0"
+    >close</mat-icon
+  >
+
+  @if(form.get('title')?.invalid && form.get('title')?.touched){
+  <mat-error class="text-sm text-red-600 -mt-2"
+    >Set a title for your task</mat-error
+  >
+  }
+
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" />
+  </mat-form-field>
+
+  <mat-radio-group formControlName="done">
+    <mat-radio-button [value]="true">Done</mat-radio-button>
+    <mat-radio-button [value]="false">To Do</mat-radio-button>
+  </mat-radio-group>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="self-end"
+    [disabled]="form.invalid"
+  >
+    {{ isEditMode ? "Update" : "Add" }}
+  </button>
+</form>
